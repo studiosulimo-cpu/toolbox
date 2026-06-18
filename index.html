@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turi's Technical Tools</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            background: #f2f4f7;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: url("sfondo.png") center center no-repeat;
+            background-size: cover;
+            filter: blur(6px);
+            transform: scale(1.08);
+            z-index: -2;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.55);
+            z-index: -1;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            padding: 40px;
+            border-radius: 28px;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1b2a41;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #556070;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 110px;
+            padding: 25px;
+            text-decoration: none;
+            text-align: center;
+            color: #1b2a41;
+            font-weight: 700;
+            font-size: 1.05rem;
+            border-radius: 18px;
+            background: white;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 35px;
+            color: #667085;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .card {
+                min-height: 90px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Turi's Technical Tools</h1>
+
+        <div class="subtitle">
+            Seleziona lo strumento di calcolo desiderato
+        </div>
+
+        <div class="grid">
+
+            <a class="card" href="https://studiosulimo-cpu.github.io/ante_post/" target="_blank">
+                Valutazione energetica preliminare
+            </a>
+
+            <a class="card" href="https://studiosulimo-cpu.github.io/calcolo_tariffa_servizio_energia/" target="_blank">
+                Tariffa servizio energia
+            </a>
+
+            <a class="card" href="https://studiosulimo-cpu.github.io/pompedicalore/" target="_blank">
+                Dimensionamento rapido PDC
+            </a>
+
+            <a class="card" href="https://studiosulimo-cpu.github.io/dimensionicanali/" target="_blank">
+                Dimensionamento rapido canali aria
+            </a>
+
+            <a class="card" href="https://studiosulimo-cpu.github.io/dimensionamentotubo/" target="_blank">
+                Dimensionamento rapido tubazioni e pompe
+            </a>
+
+            <a class="card" href="https://studiosulimo-cpu.github.io/contotermico30/" target="_blank">
+                Conto Termico 3.0
+            </a>
+
+        </div>
+
+        <footer>
+            © Turi's Technical Tools
+        </footer>
+
+    </div>
+
+</body>
+</html>
