@@ -15,12 +15,14 @@
 
         body {
             min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            overflow-x: hidden;
             position: relative;
             background: #f2f4f7;
+            padding: 32px 0;
         }
 
         body::before {
@@ -108,6 +110,10 @@
 
             h1 {
                 font-size: 2rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
             }
 
             .card {
