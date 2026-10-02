@@ -1,179 +1,244 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Turi's Technical Tools</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turi's Technical Tools</title>
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiByeD0iNiIgZmlsbD0iIzFjOGE1ZiIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTEyIDRhNSA1IDAgMCAwLTMuMyA4LjdjLjYuNi45IDEuMi45IDJoNC44YzAtLjguMy0xLjQuOS0yQTUgNSAwIDAgMCAxMiA0WiIvPjxwYXRoIGQ9Ik05LjUgMTdoNU0xMC41IDE5aDMiLz48cGF0aCBkPSJNMTIgN2MxLjYgMS4zIDEuNiAzLjkgMCA1LjZjLTEuNi0xLjctMS42LTQuMyAwLTUuNloiLz48cGF0aCBkPSJNMTIgOHYzLjMiLz48L2c+PC9zdmc+Cg==">
+<style>
+  :root{
+    --ink:#16283a;
+    --ink-soft:#3b4b59;
+    --muted:#687682;
+    --line:#e4e9ee;
+    --card:#ffffff;
+    --accent:#12836e;
+    --accent-deep:#0c6353;
+    --accent-soft:#e3f3ee;
+    --night:#0d1b26;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{min-height:100vh}
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Segoe UI", Arial, sans-serif;
-        }
+  body{
+    font-family:var(--sans);
+    color:var(--ink);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    min-height:100dvh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow-x:hidden;
+    position:relative;
+    background:var(--night);
+    padding:40px 0;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;z-index:-2;
+    background:
+      radial-gradient(90% 75% at 85% -8%, rgba(67,180,111,.16), transparent 55%),
+      radial-gradient(85% 70% at -5% 108%, rgba(18,131,110,.14), transparent 52%),
+      var(--night);
+  }
+  body::after{
+    content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background-image:
+      linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+    background-size:46px 46px;
+    -webkit-mask-image:radial-gradient(135% 105% at 50% 0%, #000 52%, transparent 100%);
+    mask-image:radial-gradient(135% 105% at 50% 0%, #000 52%, transparent 100%);
+  }
 
-        body {
-            min-height: 100vh;
-            min-height: 100dvh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow-x: hidden;
-            position: relative;
-            background: #f2f4f7;
-            padding: 32px 0;
-        }
+  .panel{
+    width:92%;max-width:1060px;
+    background:rgba(255,255,255,.9);
+    backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,.55);
+    border-radius:22px;
+    box-shadow:0 30px 60px -24px rgba(0,0,0,.55);
+    padding:34px 36px 30px;
+  }
 
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background: url("sfondo.png") center center no-repeat;
-            background-size: cover;
-            filter: blur(6px);
-            transform: scale(1.08);
-            z-index: -2;
-        }
+  .masthead{
+    display:flex;align-items:center;gap:15px;
+    padding-bottom:22px;margin-bottom:26px;
+    border-bottom:1px solid var(--line);
+  }
+  .logo{
+    width:54px;height:54px;flex:none;border-radius:14px;
+    background:linear-gradient(150deg,#43b46f,#1c8a5f);
+    display:grid;place-items:center;
+    box-shadow:0 8px 18px -7px rgba(28,138,95,.8);
+  }
+  .logo svg{width:30px;height:30px;stroke:#fff;fill:none;stroke-width:1.7;
+            stroke-linecap:round;stroke-linejoin:round}
+  .masthead .txt h1{
+    font-size:25px;font-weight:760;letter-spacing:-.02em;line-height:1.1;color:var(--ink);
+  }
+  .masthead .txt p{
+    margin-top:3px;font-size:13.5px;color:var(--muted);max-width:52ch;
+  }
+  .masthead .meta{
+    margin-left:auto;text-align:right;flex:none;
+    font-size:12px;color:var(--muted);line-height:1.3;
+  }
+  .masthead .meta b{display:block;font-size:19px;font-weight:720;color:var(--accent-deep);letter-spacing:-.01em}
+  @media(max-width:620px){
+    .masthead{flex-wrap:wrap;gap:13px}
+    .masthead .meta{display:none}
+    .masthead .txt p{font-size:13px}
+  }
 
-        body::after {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background: rgba(255, 255, 255, 0.55);
-            z-index: -1;
-        }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+    gap:14px;
+  }
 
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            padding: 40px;
-            border-radius: 28px;
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(12px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-        }
+  .tool{
+    display:flex;align-items:center;gap:15px;
+    padding:16px 17px;
+    text-decoration:none;color:inherit;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    box-shadow:0 1px 2px rgba(16,40,58,.04);
+    transition:transform .18s cubic-bezier(.2,.7,.3,1),
+               box-shadow .18s, border-color .18s;
+  }
+  .ic{
+    width:46px;height:46px;flex:none;border-radius:11px;
+    background:var(--accent-soft);
+    display:grid;place-items:center;
+    transition:background .18s;
+  }
+  .ic svg{width:23px;height:23px;stroke:var(--accent-deep);fill:none;
+          stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;
+          transition:stroke .18s}
+  .tool .body{min-width:0}
+  .tool .body h2{
+    font-size:15.5px;font-weight:650;letter-spacing:-.005em;color:var(--ink);
+    line-height:1.25;
+  }
+  .tool .body span{
+    display:block;margin-top:2px;font-size:12.5px;color:var(--muted);line-height:1.35;
+  }
 
-        h1 {
-            text-align: center;
-            color: #1b2a41;
-            font-size: 2.8rem;
-            margin-bottom: 10px;
-        }
+  .tool:hover{
+    transform:translateY(-3px);
+    border-color:rgba(18,131,110,.45);
+    box-shadow:0 14px 26px -14px rgba(16,40,58,.5);
+  }
+  .tool:hover .ic{background:var(--accent)}
+  .tool:hover .ic svg{stroke:#fff}
+  .tool:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
-        .subtitle {
-            text-align: center;
-            color: #556070;
-            font-size: 1.1rem;
-            margin-bottom: 40px;
-        }
+  .tool{opacity:0;animation:rise .5s cubic-bezier(.2,.7,.3,1) forwards}
+  .tool:nth-child(1){animation-delay:.04s}
+  .tool:nth-child(2){animation-delay:.09s}
+  .tool:nth-child(3){animation-delay:.14s}
+  .tool:nth-child(4){animation-delay:.19s}
+  .tool:nth-child(5){animation-delay:.24s}
+  .tool:nth-child(6){animation-delay:.29s}
+  .tool:nth-child(7){animation-delay:.34s}
+  .tool:nth-child(8){animation-delay:.39s}
+  .tool:nth-child(n+9){animation-delay:.42s}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
+  footer{
+    margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;gap:10px;
+    font-size:12px;color:var(--muted);
+  }
+  footer .tag{color:var(--accent-deep);font-weight:600}
 
-        .card {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 110px;
-            padding: 25px;
-            text-decoration: none;
-            text-align: center;
-            color: #1b2a41;
-            font-weight: 700;
-            font-size: 1.05rem;
-            border-radius: 18px;
-            background: white;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.25s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 16px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 35px;
-            color: #667085;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 25px;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            .grid {
-                grid-template-columns: 1fr;
-            }
-
-            .card {
-                min-height: 90px;
-            }
-        }
-    </style>
+  @media(max-width:600px){
+    .panel{padding:24px 20px 22px;width:90%}
+    .grid{grid-template-columns:1fr}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{transition:none!important;animation:none!important}
+    .tool{opacity:1}
+  }
+</style>
 </head>
-
 <body>
 
-    <div class="container">
+<main class="panel">
 
-        <h1>Turi's Technical Tools</h1>
-
-        <div class="subtitle">
-            Seleziona lo strumento di calcolo desiderato
-        </div>
-
-        <div class="grid">
-
-            <a class="card" href="https://studiosulimo-cpu.github.io/ante_post/" target="_blank">
-                Valutazione energetica preliminare
-            </a>
-
-            <a class="card" href="https://studiosulimo-cpu.github.io/calcolo_tariffa_servizio_energia/" target="_blank">
-                Tariffa servizio energia
-            </a>
-
-            <a class="card" href="https://studiosulimo-cpu.github.io/pompedicalore/" target="_blank">
-                Dimensionamento rapido PDC
-            </a>
-
-            <a class="card" href="https://studiosulimo-cpu.github.io/climanew/" target="_blank">
-                Calcolo Split
-            </a>
-
-            <a class="card" href="https://studiosulimo-cpu.github.io/dimensionicanali/" target="_blank">
-                Dimensionamento rapido canali aria
-            </a>
-
-            <a class="card" href="https://studiosulimo-cpu.github.io/diffusoriaria/" target="_blank">
-                Dimensionamento rapido diffusori aria
-            </a>
-
-            <a class="card" href="https://studiosulimo-cpu.github.io/dimensionamentotubo/" target="_blank">
-                Dimensionamento rapido tubazioni e pompe
-            </a>
-
-            <a class="card" href="https://studiosulimo-cpu.github.io/contotermico30/" target="_blank">
-                Conto Termico 3.0
-            </a>
-
-        </div>
-
-        <footer>
-            © Turi's Technical Tools
-        </footer>
-
+  <div class="masthead">
+    <div class="logo" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 2.5a6.2 6.2 0 0 0-4.2 10.8c.8.8 1.1 1.6 1.1 2.7h6.2c0-1.1.3-1.9 1.1-2.7A6.2 6.2 0 0 0 12 2.5Z"/>
+        <path d="M8.8 18h6.4M10 20.5h4"/>
+        <path d="M12 6.4c2 1.6 2 4.9 0 7.1c-2-2.2-2-5.5 0-7.1Z"/>
+        <path d="M12 7.5v5.2"/>
+        <path d="M12 9.6l1.3-.8M12 11l1.3-.8M12 9.6l-1.3-.8M12 11l-1.3-.8"/>
+      </svg>
     </div>
+    <div class="txt">
+      <h1>Turi's Technical Tools</h1>
+      <p>Strumenti di calcolo per la progettazione energetica e impiantistica.</p>
+    </div>
+    <div class="meta">
+      <b>8</b>
+      strumenti
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <a class="tool" href="https://studiosulimo-cpu.github.io/ante_post/" target="_blank">
+      <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 11 12 4l8 7"/><path d="M6 10v9h12v-9"/><path d="m9.5 14.5 1.8 1.8 3.2-3.6"/></svg></div>
+      <div class="body"><h2>Valutazione energetica preliminare</h2><span>Confronto rapido ante / post intervento</span></div>
+    </a>
+
+    <a class="tool" href="https://studiosulimo-cpu.github.io/calcolo_tariffa_servizio_energia/" target="_blank">
+      <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M14.5 9.3a3.2 3.2 0 0 0-5 .6M9 11h5M9 13.3h5M9.5 15.5a3.2 3.2 0 0 0 5-.6"/></svg></div>
+      <div class="body"><h2>Tariffa servizio energia</h2><span>Costruzione del prezzo del servizio calore</span></div>
+    </a>
+
+    <a class="tool" href="https://studiosulimo-cpu.github.io/pompedicalore/" target="_blank">
+      <div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="9" cy="12" r="3"/><path d="M9 9.5v5M6.5 12h5M16 10h2.5M16 14h2.5"/></svg></div>
+      <div class="body"><h2>Dimensionamento rapido PDC</h2><span>Taglia e resa della pompa di calore</span></div>
+    </a>
+
+    <a class="tool" href="https://studiosulimo-cpu.github.io/climanew/" target="_blank">
+      <div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="8" rx="2.5"/><path d="M6 9h8"/><path d="M7 16c0 1.2-1 1.5-1 2.8M12 16c0 1.2-1 1.5-1 2.8M17 16c0 1.2-1 1.5-1 2.8"/></svg></div>
+      <div class="body"><h2>Calcolo Split</h2><span>Carico frigorifero e scelta della macchina</span></div>
+    </a>
+
+    <a class="tool" href="https://studiosulimo-cpu.github.io/dimensionicanali/" target="_blank">
+      <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 7h9l6 5v5H3z"/><path d="M3 11h9M12 7v10"/><path d="M18 12h3"/></svg></div>
+      <div class="body"><h2>Dimensionamento rapido canali aria</h2><span>Sezioni, velocità e perdite di carico</span></div>
+    </a>
+
+    <a class="tool" href="https://studiosulimo-cpu.github.io/diffusoriaria/" target="_blank">
+      <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17M3.5 12h17M6 6l12 12M18 6 6 18"/></svg></div>
+      <div class="body"><h2>Dimensionamento rapido diffusori aria</h2><span>Scelta e verifica dei diffusori</span></div>
+    </a>
+
+    <a class="tool" href="https://studiosulimo-cpu.github.io/dimensionamentotubo/" target="_blank">
+      <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 8h8a4 4 0 0 1 4 4v1"/><path d="M3 5.5v5"/><circle cx="17.5" cy="14.5" r="3.5"/><path d="M17.5 12v5M15 14.5h5"/></svg></div>
+      <div class="body"><h2>Dimensionamento rapido tubazioni e pompe</h2><span>Diametri, perdite e prevalenza</span></div>
+    </a>
+
+    <a class="tool" href="https://studiosulimo-cpu.github.io/contotermico30/" target="_blank">
+      <div class="ic"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M10.5 11.5 15 16M15 11.5l-4.5 4.5"/><path d="M9 19c1.5-2 4.5-2 6 0"/></svg></div>
+      <div class="body"><h2>Conto Termico 3.0</h2><span>Calcolo dell'incentivo (D.M. 2025)</span></div>
+    </a>
+
+  </div>
+
+  <footer>
+    <span class="tag">Turi's Technical Tools</span>
+    <span>uso professionale interno</span>
+  </footer>
+
+</main>
 
 </body>
 </html>
